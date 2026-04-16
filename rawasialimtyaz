@@ -3,178 +3,278 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>شركة رواسي الامتياز للإستقدام | جاري التحويل</title>
-    <meta http-equiv="refresh" content="5; url=tel:920008490">
+    <title>شركة رواسي الامتياز للإستقدام | تواصل معنا</title>
     <style>
         :root {
-            --brand-green: #0a7c3e; /* درجة الأخضر من اللوجو */
-            --brand-blue: #1c8ac9;  /* درجة الأزرق من اللوجو */
+            --brand-green: #0a7c3e;
+            --brand-blue: #1c8ac9;
+            --bg-light: #f4f9f9;
         }
         
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            background-color: #f8fcfb;
+            background-color: var(--bg-light);
             color: #333;
-            text-align: center;
-            overflow: hidden;
-        }
-
-        .container {
-            background: white;
-            padding: 40px 30px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-            max-width: 450px;
-            width: 85%;
+            padding: 20px;
+            box-sizing: border-box;
             position: relative;
-            border-top: 5px solid var(--brand-green);
-            border-bottom: 5px solid var(--brand-blue);
+            overflow-x: hidden;
         }
 
-        /* تنسيق اللوجو */
-        .logo-img {
-            max-width: 180px;
-            margin-bottom: 20px;
-        }
-
-        h2 {
-            color: var(--brand-green);
-            margin-bottom: 10px;
-            font-size: 1.4rem;
-        }
-
-        p.subtitle {
-            color: #666;
-            font-size: 1.1rem;
-            margin-bottom: 25px;
-        }
-
-        /* الأنيميشن (Motion Graphics) */
-        .pulse-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 15px;
-            margin: 30px 0;
-        }
-
-        .pulse-dot {
-            width: 20px;
-            height: 20px;
+        /* --- الأشكال المتحركة في الخلفية --- */
+        .bg-shape {
+            position: absolute;
+            filter: blur(80px);
+            opacity: 0.4;
+            z-index: -1;
             border-radius: 50%;
-            animation: bounce 1.5s infinite ease-in-out both;
+            animation: float 10s infinite alternate ease-in-out;
+        }
+        .shape-1 {
+            width: 300px; height: 300px;
+            background-color: var(--brand-blue);
+            top: -50px; right: -50px;
+            animation-delay: 0s;
+        }
+        .shape-2 {
+            width: 250px; height: 250px;
+            background-color: var(--brand-green);
+            bottom: 10%; left: -50px;
+            animation-delay: -5s;
         }
 
-        .pulse-dot:nth-child(1) { background-color: var(--brand-blue); animation-delay: -0.32s; }
-        .pulse-dot:nth-child(2) { background-color: var(--brand-green); animation-delay: -0.16s; }
-        .pulse-dot:nth-child(3) { background-color: var(--brand-blue); }
-
-        @keyframes bounce {
-            0%, 80%, 100% { transform: scale(0); }
-            40% { transform: scale(1); }
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(30px, 50px) scale(1.1); }
         }
 
-        /* شريط التحميل */
-        .progress-bar-container {
+        /* --- الحاوية الأساسية (تأثير الزجاج) --- */
+        .container {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            padding: 35px 25px;
+            border-radius: 24px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            max-width: 400px;
             width: 100%;
-            height: 6px;
-            background-color: #e0e0e0;
-            border-radius: 10px;
-            overflow: hidden;
-            margin-bottom: 15px;
+            text-align: center;
+            margin-top: 2vh;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
-        .progress-bar {
-            height: 100%;
-            width: 0%;
-            background: linear-gradient(90deg, var(--brand-blue), var(--brand-green));
-            transition: width 1s linear;
+        /* حركات الدخول */
+        @keyframes fadeUp {
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        /* الزر الاحتياطي */
-        .btn-call {
+        /* --- النصوص --- */
+        .brand-name {
+            font-size: 1.7rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+        .brand-name .green-text { color: var(--brand-green); }
+        .brand-name .blue-text { color: var(--brand-blue); }
+
+        .subtitle {
+            color: #555;
+            font-size: 1.05rem;
+            margin-bottom: 30px;
+            font-weight: 500;
+            position: relative;
             display: inline-block;
-            margin-top: 15px;
-            padding: 12px 35px;
-            background: linear-gradient(45deg, var(--brand-green), var(--brand-blue));
+        }
+        
+        /* حركة لكلمة يسعدنا تواصلكم */
+        .subtitle::after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--brand-blue), transparent);
+            bottom: -8px;
+            left: 25%;
+            border-radius: 2px;
+            animation: lineWidth 2s infinite alternate ease-in-out;
+        }
+
+        @keyframes lineWidth {
+            0% { width: 20%; left: 40%; opacity: 0.5;}
+            100% { width: 80%; left: 10%; opacity: 1;}
+        }
+
+        /* --- زر الرقم الموحد (نبض متوهج) --- */
+        .btn-main {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 16px;
+            background: linear-gradient(135deg, var(--brand-green), var(--brand-blue));
             color: white;
             text-decoration: none;
-            border-radius: 50px;
+            border-radius: 14px;
             font-weight: bold;
-            font-size: 1.1rem;
-            box-shadow: 0 4px 15px rgba(28, 138, 201, 0.4);
-            transition: transform 0.3s ease;
+            font-size: 1.25rem;
+            box-shadow: 0 8px 20px rgba(28, 138, 201, 0.3);
+            margin-bottom: 35px;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+            animation: pulseGlow 2.5s infinite;
         }
 
-        .btn-call:hover {
-            transform: scale(1.05);
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 0 0 rgba(28, 138, 201, 0.4); }
+            70% { box-shadow: 0 0 0 15px rgba(28, 138, 201, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(28, 138, 201, 0); }
         }
+
+        .btn-main:active { transform: scale(0.96); }
+
+        /* --- قسم المناديب --- */
+        .reps-section {
+            text-align: right;
+            border-top: 1px solid rgba(0,0,0,0.05);
+            padding-top: 25px;
+        }
+
+        .reps-section h3 {
+            font-size: 1.1rem;
+            color: #444;
+            margin-bottom: 18px;
+            text-align: center;
+        }
+
+        .reps-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        /* أزرار أرقام المناديب مع دخول متدرج */
+        .btn-rep {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background: white;
+            color: #333;
+            text-decoration: none;
+            border: 1px solid #eef2f5;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            opacity: 0;
+            transform: translateX(-20px);
+            animation: slideIn 0.5s forwards;
+        }
+        
+        .btn-rep:hover, .btn-rep:active {
+            background-color: var(--brand-blue);
+            color: white;
+            border-color: var(--brand-blue);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(28, 138, 201, 0.2);
+        }
+
+        @keyframes slideIn {
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        /* تأخير دخول أزرار المناديب بالترتيب */
+        .btn-rep:nth-child(1) { animation-delay: 0.3s; }
+        .btn-rep:nth-child(2) { animation-delay: 0.4s; }
+        .btn-rep:nth-child(3) { animation-delay: 0.5s; }
+        .btn-rep:nth-child(4) { animation-delay: 0.6s; }
+        .btn-rep:nth-child(5) { animation-delay: 0.7s; }
+        .btn-rep:nth-child(6) { animation-delay: 0.8s; }
+        .btn-rep:nth-child(7) { animation-delay: 0.9s; }
+
+        .rep-icon { font-size: 1.2rem; }
 
         .footer {
-            margin-top: 30px;
+            margin-top: 40px;
             font-size: 0.85rem;
-            color: #999;
+            color: #888;
+            text-align: center;
+            opacity: 0;
+            animation: fadeUp 1s 1s forwards;
         }
     </style>
 </head>
 <body>
 
+    <div class="bg-shape shape-1"></div>
+    <div class="bg-shape shape-2"></div>
+
     <div class="container">
-        <img src="LOGO_WEB.png" alt="شركة رواسي الامتياز للإستقدام" class="logo-img">
+        <div class="brand-name">
+            <span class="green-text">شركة رواسي الامتياز</span> 
+            <br>
+            <span class="blue-text">للإستقدام</span>
+        </div>
         
-        <h2>جاري تحويلك إلى أحد ممثلي خدمة العملاء...</h2>
-        <p class="subtitle">سيتم بدء الاتصال خلال <strong id="countdown">5</strong> ثوانٍ</p>
+        <div class="subtitle">يسعدنا تواصلكم لخدمتكم بشكل أفضل</div>
 
-        <div class="pulse-container">
-            <div class="pulse-dot"></div>
-            <div class="pulse-dot"></div>
-            <div class="pulse-dot"></div>
+        <a href="tel:920008490" class="btn-main">
+            <span>الرقم الموحد: 920008490</span>
+            <span>📞</span>
+        </a>
+
+        <div class="reps-section">
+            <h3>أو تواصل مباشرة مع أحد ممثلينا:</h3>
+            <div class="reps-list">
+                <a href="tel:0552520205" class="btn-rep">
+                    <span dir="ltr">055 252 0205</span>
+                    <span class="rep-icon">📱</span>
+                </a>
+                <a href="tel:0555883173" class="btn-rep">
+                    <span dir="ltr">055 588 3173</span>
+                    <span class="rep-icon">📱</span>
+                </a>
+                <a href="tel:0503513003" class="btn-rep">
+                    <span dir="ltr">050 351 3003</span>
+                    <span class="rep-icon">📱</span>
+                </a>
+                <a href="tel:0551188278" class="btn-rep">
+                    <span dir="ltr">055 118 8278</span>
+                    <span class="rep-icon">📱</span>
+                </a>
+                <a href="tel:0564577175" class="btn-rep">
+                    <span dir="ltr">056 457 7175</span>
+                    <span class="rep-icon">📱</span>
+                </a>
+                <a href="tel:0539655770" class="btn-rep">
+                    <span dir="ltr">053 965 5770</span>
+                    <span class="rep-icon">📱</span>
+                </a>
+                <a href="tel:0538386640" class="btn-rep">
+                    <span dir="ltr">053 838 6640</span>
+                    <span class="rep-icon">📱</span>
+                </a>
+            </div>
         </div>
-
-        <div class="progress-bar-container">
-            <div class="progress-bar" id="progressBar"></div>
-        </div>
-
-        <a href="tel:920008490" class="btn-call" id="callBtn" style="display: none;">اضغط هنا للاتصال يدوياً 📞</a>
     </div>
 
     <div class="footer">
-        &copy; <span id="year"></span> شركة رواسي الامتياز للإستقدام. جميع الحقوق محفوظة.
+        &copy; <span id="year"></span> شركة رواسي الامتياز للإستقدام.
     </div>
 
     <script>
-        // ضبط السنة تلقائياً في الفوتر
         document.getElementById("year").textContent = new Date().getFullYear();
-
-        // برمجة العداد التنازلي وشريط التحميل
-        let timeLeft = 5;
-        const countdownEl = document.getElementById("countdown");
-        const progressBarEl = document.getElementById("progressBar");
-        const callBtn = document.getElementById("callBtn");
-
-        // تشغيل شريط التحميل (من 0 لـ 100% خلال 5 ثواني)
-        setTimeout(() => {
-            progressBarEl.style.width = "100%";
-        }, 100); 
-
-        const timer = setInterval(() => {
-            timeLeft--;
-            countdownEl.textContent = timeLeft;
-
-            if (timeLeft <= 0) {
-                clearInterval(timer);
-                // إظهار الزر في حال المتصفح منع التحويل التلقائي
-                callBtn.style.display = "inline-block";
-                // تنفيذ الاتصال برمجياً
-                window.location.href = "tel:920008490";
-            }
-        }, 1000); // تحديث كل ثانية
     </script>
 
 </body>
